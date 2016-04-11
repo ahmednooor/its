@@ -1,7 +1,8 @@
 @media only screen and (min-width: 1px) and (max-width: 679px) {
-    body {
+    body, html {
         font-family: 'Roboto', sans-serif;
         background-color: steelblue;
+        width: auto;
         overflow-x: hidden;
         margin: 0 auto;
         padding: 0;
@@ -516,7 +517,7 @@
 }
 
 @media only screen and (min-width: 680px) and (max-width: 959px) {
-    body {
+    body, html {
         font-family: 'Roboto', sans-serif;
         background-color: steelblue;
         overflow-x: hidden;
@@ -1031,7 +1032,7 @@
 }
 
 @media only screen and (min-width: 960px) {
-    body {
+    body, html {
         font-family: 'Roboto', sans-serif;
         background-color: steelblue;
         overflow-x: hidden;

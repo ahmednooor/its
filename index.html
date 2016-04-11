@@ -14,7 +14,7 @@
     <title>I.T.S</title>
 </head>
 
-<body id="top">
+<body>
 
 <div class="top">
     <a href="#top"><img src="img/top.png" alt="top"></a>
@@ -292,8 +292,8 @@
 
 <script src="js/jquery-2.2.2.min.js"></script>
 <script src="js/imagelightbox.min.js" type="text/javascript"></script>
-<script src="js/jquery.localScroll.js" type="text/javascript"></script>
 <script src="js/jquery.scrollTo.min.js" type="text/javascript"></script>
+<script src="js/jquery.localScroll.js" type="text/javascript"></script>
 <script src="js/wow.min.js" type="text/javascript"></script>
 <script>
 
@@ -319,7 +319,7 @@
     $( function()
     {
         $( '.gallery a' ).imageLightbox({
-            activity:       false,                    // bool;            show activity indicator
+            activity:       false,                   // bool;            show activity indicator
             button:         true,                    // bool;            show close button
             caption:        true,                    // bool;            show captions
             navigation:     true,                    // bool;            show navigation
@@ -330,8 +330,18 @@
 </script>
 <script>
 //  Javascript Smooth Scrolling Effect by using LocalScroll and ScrollTo
-    $('#top').localScroll();
-    $('#header').localScroll();
+    $(document).ready(function()
+    {
+        // Scroll the whole document
+        $('#menu').localScroll({
+           target:'body'
+        });
+        
+        $('#header').localScroll({
+           target:'body'
+        });
+ 
+    });
 </script>
 </body>
 

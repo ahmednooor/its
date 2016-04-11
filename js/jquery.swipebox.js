@@ -21,7 +21,7 @@
 				afterMedia: null,
 				nextSlide: null,
 				prevSlide: null,
-				loopAtEnd: false,
+				loopAtEnd: true,
 				autoplayVideos: false,
 				queryStringData: {},
 				toggleClassOnLoad: ''
@@ -38,7 +38,8 @@
 			winHeight = window.innerHeight ? window.innerHeight : $( window ).height(),
 			currentX = 0,
 			/* jshint multistr: true */
-			html = '<div id="swipebox-overlay">\
+			html = '<meta name="viewport" content="width=device-width, initial-scale=1.0">\
+                    <div id="swipebox-overlay">\
 					<div id="swipebox-container">\
 						<div id="swipebox-slider"></div>\
 						<div id="swipebox-top-bar">\

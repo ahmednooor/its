@@ -90,7 +90,7 @@
     };
     var touchstartHandler = function(event) {
         touch.count++;
-        if (touch.count === 2) {
+        if (touch.count > 1) {
             touch.multitouch = true;
         }
         // Save x and y axis position
@@ -105,20 +105,16 @@
         event.preventDefault ? event.preventDefault() : event.returnValue = false; // jshint ignore:line
         var touchEvent = event.touches[0] || event.changedTouches[0];
         // Move at least 40 pixels to trigger the action
-        if (touchEvent.pageX - touch.startX > 40) {
+        if (touchEvent.pageX - touch.startX > 40 && touch.multitouch = false) {
             touchFlag = true;
             showPreviousImage();
-        } else if (touchEvent.pageX - touch.startX < -40) {
+        } else if (touchEvent.pageX - touch.startX < -40 && touch.multitouch = false) {
             touchFlag = true;
             showNextImage();
         // Move 100 pixels up to close the overlay
         } else if (touch.startY - touchEvent.pageY > 100) {
             hideOverlay();
-        } else if (touch.multitouch = true) {
-            showPreviousImage(false);
-            showNextImage(false);
         }
-        
     };
     var touchendHandler = function() {
         touch.count--;

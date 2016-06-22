@@ -105,7 +105,11 @@
         event.preventDefault ? event.preventDefault() : event.returnValue = false; // jshint ignore:line
         var touchEvent = event.touches[0] || event.changedTouches[0];
         // Move at least 40 pixels to trigger the action
-        if (touchEvent.pageX - touch.startX > 40) {
+        if (touchEvent.pageX - touch.startX > 40 && touch.count > 1) {
+            touchFlag = false;
+        } else if (touchEvent.pageX - touch.startX < -40 && touch.count > 1) {
+            touchFlag = false;
+        } else if (touchEvent.pageX - touch.startX > 40) {
             touchFlag = true;
             showPreviousImage();
         } else if (touchEvent.pageX - touch.startX < -40) {

@@ -106,9 +106,9 @@
         var touchEvent = event.touches[0] || event.changedTouches[0];
         // Move at least 40 pixels to trigger the action
         if (touchEvent.pageX - touch.startX > 40 && touch.count > 1) {
-            touchFlag = false;
+            touchFlag = true;
         } else if (touchEvent.pageX - touch.startX < -40 && touch.count > 1) {
-            touchFlag = false;
+            touchFlag = true;
         } else if (touchEvent.pageX - touch.startX > 40) {
             touchFlag = true;
             showPreviousImage();

@@ -61,7 +61,6 @@
     // Touch event start position (for slide gesture)
     var touch = {};
     var viewportScale = document.body.clientWidth / window.innerWidth;
-    alert(viewportScale);
     // If set to true ignore touch events because animation was already fired
     var touchFlag = false;
     // Regex pattern to match image files

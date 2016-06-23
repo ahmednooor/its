@@ -96,9 +96,8 @@
             dualtouch = touch;
         }
         if (dualtouch = touch) {
-            return;
-        }
         event.preventDefault ? event.preventDefault() : event.returnValue = false; // jshint ignore:line
+        }
         // Save x and y axis position
         touch.startX = event.changedTouches[0].pageX;
         touch.startY = event.changedTouches[0].pageY;

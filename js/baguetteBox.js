@@ -99,6 +99,8 @@
         // Save x and y axis position
         touch.startX = event.changedTouches[0].pageX;
         touch.startY = event.changedTouches[0].pageY;
+        dualtouch.startX = event.changedTouches[0].pageX;
+        dualtouch.startY = event.changedTouches[0].pageY;
     };
     var touchmoveHandler = function(event) {
         // If action was already triggered or multitouch return
@@ -108,10 +110,10 @@
         event.preventDefault ? event.preventDefault() : event.returnValue = false; // jshint ignore:line
         var touchEvent = event.touches[0] || event.changedTouches[0];
         // Move at least 40 pixels to trigger the action
-        if (touchEvent.pageX - touch.startX > 40) {
+        if (touchEvent.pageX - touch.startX > 40 && touch.count === 1) {
             touchFlag = true;
             showPreviousImage();
-        } else if (touchEvent.pageX - touch.startX < -40) {
+        } else if (touchEvent.pageX - touch.startX < -40 && touch.count === 1) {
             touchFlag = true;
             showNextImage();
         // Move 100 pixels up to close the overlay

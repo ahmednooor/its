@@ -93,7 +93,7 @@
         if (touch.count > 1) {
             touch.multitouch = true;
         }
-        console.log(touch);
+        console.log(touch.count++);
         // Save x and y axis position
         touch.startX = event.changedTouches[0].pageX;
         touch.startY = event.changedTouches[0].pageY;

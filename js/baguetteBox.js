@@ -60,7 +60,7 @@
     var currentIndex = 0;
     // Touch event start position (for slide gesture)
     var touch = {};
-    var dualtouch = {};
+    var viewportScale = screen.width / window.innerWidth;
     // If set to true ignore touch events because animation was already fired
     var touchFlag = false;
     // Regex pattern to match image files
@@ -92,28 +92,24 @@
     var touchstartHandler = function(event) {
         touch.count++;
         if (touch.count > 1) {
-//            touch.multitouch = true;
-            dualtouch = touch;
-            dualtouch.multitouch = true;
+            touch.multitouch = true;
         }
         // Save x and y axis position
         touch.startX = event.changedTouches[0].pageX;
         touch.startY = event.changedTouches[0].pageY;
-        dualtouch.startX = event.changedTouches[0].pageX;
-        dualtouch.startY = event.changedTouches[0].pageY;
     };
     var touchmoveHandler = function(event) {
         // If action was already triggered or multitouch return
-        if (touchFlag || dualtouch.multitouch) {
+        if (touchFlag || touch.multitouch) {
             return;
         }
         event.preventDefault ? event.preventDefault() : event.returnValue = false; // jshint ignore:line
         var touchEvent = event.touches[0] || event.changedTouches[0];
         // Move at least 40 pixels to trigger the action
-        if (touchEvent.pageX - touch.startX > 40 && touch.count === 1) {
+        if (touchEvent.pageX - touch.startX > 40 && viewportScale = 1) {
             touchFlag = true;
             showPreviousImage();
-        } else if (touchEvent.pageX - touch.startX < -40 && touch.count === 1) {
+        } else if (touchEvent.pageX - touch.startX < -40 && viewportScale = 1) {
             touchFlag = true;
             showNextImage();
         // Move 100 pixels up to close the overlay

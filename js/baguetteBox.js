@@ -94,6 +94,7 @@
         if (touch.count > 1) {
 //            touch.multitouch = true;
             dualtouch = touch;
+            dualtouch.multitouch = true;
         }
         if (dualtouch = touch) {
         event.preventDefault ? event.preventDefault() : event.returnValue = false; // jshint ignore:line

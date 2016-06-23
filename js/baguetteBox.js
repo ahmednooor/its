@@ -60,6 +60,7 @@
     var currentIndex = 0;
     // Touch event start position (for slide gesture)
     var touch = {};
+    var dualtouch = {};
     // If set to true ignore touch events because animation was already fired
     var touchFlag = false;
     // Regex pattern to match image files
@@ -91,11 +92,13 @@
     var touchstartHandler = function(event) {
         touch.count++;
         if (touch.count > 1) {
-            touch.multitouch = true;
+//            touch.multitouch = true;
+            dualtouch = touch;
         }
-        if (touch.multitouch = true) {
-            touchFlag = true;
+        if (dualtouch = touch) {
+            return;
         }
+        event.preventDefault ? event.preventDefault() : event.returnValue = false; // jshint ignore:line
         // Save x and y axis position
         touch.startX = event.changedTouches[0].pageX;
         touch.startY = event.changedTouches[0].pageY;

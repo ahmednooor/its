@@ -96,16 +96,13 @@
             dualtouch = touch;
             dualtouch.multitouch = true;
         }
-        if (dualtouch.multitouch = true) {
-        event.preventDefault ? event.preventDefault() : event.returnValue = false; // jshint ignore:line
-        }
         // Save x and y axis position
         touch.startX = event.changedTouches[0].pageX;
         touch.startY = event.changedTouches[0].pageY;
     };
     var touchmoveHandler = function(event) {
         // If action was already triggered or multitouch return
-        if (touchFlag || touch.multitouch) {
+        if (touchFlag || dualtouch.multitouch) {
             return;
         }
         event.preventDefault ? event.preventDefault() : event.returnValue = false; // jshint ignore:line

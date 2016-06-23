@@ -93,6 +93,7 @@
         if (touch.count > 1) {
             touch.multitouch = true;
         }
+        console.log(touch.count);
         // Save x and y axis position
         touch.startX = event.changedTouches[0].pageX;
         touch.startY = event.changedTouches[0].pageY;
@@ -105,10 +106,10 @@
         event.preventDefault ? event.preventDefault() : event.returnValue = false; // jshint ignore:line
         var touchEvent = event.touches[0] || event.changedTouches[0];
         // Move at least 40 pixels to trigger the action
-        if (touchEvent.pageX - touch.startX > 40 && touch.multitouch = false) {
+        if (touchEvent.pageX - touch.startX > 40) {
             touchFlag = true;
             showPreviousImage();
-        } else if (touchEvent.pageX - touch.startX < -40 && touch.multitouch = false) {
+        } else if (touchEvent.pageX - touch.startX < -40) {
             touchFlag = true;
             showNextImage();
         // Move 100 pixels up to close the overlay

@@ -60,7 +60,6 @@
     var currentIndex = 0;
     // Touch event start position (for slide gesture)
     var touch = {};
-    var viewportScale = document.body.clientWidth / window.innerWidth;
     // If set to true ignore touch events because animation was already fired
     var touchFlag = false;
     // Regex pattern to match image files
@@ -106,10 +105,10 @@
         event.preventDefault ? event.preventDefault() : event.returnValue = false; // jshint ignore:line
         var touchEvent = event.touches[0] || event.changedTouches[0];
         // Move at least 40 pixels to trigger the action
-        if (touchEvent.pageX - touch.startX > 40 && viewportScale = 1) {
+        if (touchEvent.pageX - touch.startX > 40) {
             touchFlag = true;
             showPreviousImage();
-        } else if (touchEvent.pageX - touch.startX < -40 && viewportScale = 1) {
+        } else if (touchEvent.pageX - touch.startX < -40) {
             touchFlag = true;
             showNextImage();
         // Move 100 pixels up to close the overlay

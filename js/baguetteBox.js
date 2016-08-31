@@ -103,11 +103,12 @@
     };
     var touchmoveHandler = function(event) {
         // If action was already triggered return
-        if (window.innerWidth == viewport || event.count != 2) {
-//            if (touchFlag) {
+        var touches = event.length;
+        if (window.innerWidth == viewport && touches != 2) {
+            if (touchFlag) {
                 return;
-//            }
-            event.preventDefault ? event.preventDefault() : event.returnValue = false; // jshint ignore:line
+            }
+//            event.preventDefault ? event.preventDefault() : event.returnValue = false; // jshint ignore:line
             var touch = event.touches[0] || event.changedTouches[0];
             // Move at least 40 pixels to trigger the action
             if (touch.pageX - touchStartX > 40) {
@@ -125,11 +126,11 @@
         }
     };
     var touchendHandler = function() {
-//        if (window.innerWidth == viewport) {
-//            touchFlag = false;
-//        } else if (window.innerWidth > viewport) {
-//            touchFlag = true;
-//        }
+        if (window.innerWidth == viewport) {
+            touchFlag = false;
+        } else if (window.innerWidth > viewport) {
+            touchFlag = true;
+        }
     };
 
     // forEach polyfill for IE8

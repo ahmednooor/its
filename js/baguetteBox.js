@@ -89,6 +89,7 @@
         hideOverlay();
     };
     var touchstartHandler = function(event) {
+        touch = {};
         touch.count++;
         if (touch.count > 1) {
             touch.multitouch = true;
@@ -116,13 +117,17 @@
         // Move 100 pixels up to close the overlay
         } else if (touch.startY - touchEvent.pageY > 100 && touch.count === 1) {
             hideOverlay();
+        } else {
+            touch = {};
+            touchFlag = false;
+            touch.multitouch = false;
         }
     };
     var touchendHandler = function() {
-        touch.count--;
-        if (touch.count <= 0) {
+        touch = {};
+//        if (touch.count <= 0) {
             touch.multitouch = false;
-        }
+//        }
         touchFlag = false;
     };
 

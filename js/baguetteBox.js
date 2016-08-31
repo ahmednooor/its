@@ -92,8 +92,10 @@
     var multiTouch = false;
     var touchstartHandler = function(event) {
         // Save x and y axis position
+        if (document.innerWidth == window.innerWidth || document.innerWidth < window.innerWidth) {
         touchStartX = event.changedTouches[0].pageX;
         touchStartY = event.changedTouches[0].pageY;
+        }
     };
     var touchmoveHandler = function(event) {
         // If action was already triggered return

@@ -90,11 +90,15 @@
         hideOverlay();
     };
     var multiTouch = false;
+    var viewport = window.innerWidth;
     var touchstartHandler = function(event) {
         // Save x and y axis position
-        if (document.innerWidth == window.innerWidth || document.innerWidth < window.innerWidth) {
+        if (window.innerWidth == viewport) {
         touchStartX = event.changedTouches[0].pageX;
         touchStartY = event.changedTouches[0].pageY;
+            return true;
+        } else if (window.innerWidth > viewport) {
+            return false;
         }
     };
     var touchmoveHandler = function(event) {

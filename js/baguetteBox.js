@@ -1,7 +1,7 @@
 /*!
  * baguetteBox.js
  * @author  feimosi
- * @version %%INJECT_VERSION%%
+ * @version 1.8.0
  * @url https://github.com/feimosi/baguetteBox.js
  */
 
@@ -101,18 +101,20 @@
         // If action was already triggered or multitouch return
         if (touchFlag || touch.multitouch) {
             return;
+        } else if ((touchFlag || touch.multitouch) && touch.count === 2) {
+            return false;
         }
         event.preventDefault ? event.preventDefault() : event.returnValue = false; // jshint ignore:line
         var touchEvent = event.touches[0] || event.changedTouches[0];
         // Move at least 40 pixels to trigger the action
-        if (touchEvent.pageX - touch.startX > 40) {
+        if (touchEvent.pageX - touch.startX > 40 && touch.count === 1 ) {
             touchFlag = true;
             showPreviousImage();
-        } else if (touchEvent.pageX - touch.startX < -40) {
+        } else if (touchEvent.pageX - touch.startX < -40 && touch.count === 1) {
             touchFlag = true;
             showNextImage();
         // Move 100 pixels up to close the overlay
-        } else if (touch.startY - touchEvent.pageY > 100) {
+        } else if (touch.startY - touchEvent.pageY > 100 && touch.count === 1) {
             hideOverlay();
         }
     };
@@ -483,27 +485,33 @@
             }
             return;
         }
+
         // Get element reference, optional caption and source path
         var imageElement = currentGallery[index].imageElement;
+        var thumbnailElement = imageElement.getElementsByTagName('img')[0];
         var imageCaption = typeof options.captions === 'function' ?
                             options.captions.call(currentGallery, imageElement) :
                             imageElement.getAttribute('data-caption') || imageElement.title;
         var imageSrc = getImageSrc(imageElement);
-        // Prepare image container elements
+
+        // Prepare figure element
         var figure = create('figure');
-        var image = create('img');
-        var figcaption = create('figcaption');
-
         figure.id = 'baguetteBox-figure-' + index;
-        figcaption.id = 'baguetteBox-figcaption-' + index;
-
-        imageContainer.appendChild(figure);
-        // Add loader element
         figure.innerHTML = '<div class="baguetteBox-spinner">' +
             '<div class="baguetteBox-double-bounce1"></div>' +
             '<div class="baguetteBox-double-bounce2"></div>' +
             '</div>';
-        // Set callback function when image loads
+        // Insert caption if available
+        if (options.captions && imageCaption) {
+            var figcaption = create('figcaption');
+            figcaption.id = 'baguetteBox-figcaption-' + index;
+            figcaption.innerHTML = imageCaption;
+            figure.appendChild(figcaption);
+        }
+        imageContainer.appendChild(figure);
+
+        // Prepare gallery img element
+        var image = create('img');
         image.onload = function() {
             // Remove loader element
             var spinner = document.querySelector('#baguette-img-' + index + ' .baguetteBox-spinner');
@@ -513,15 +521,12 @@
             }
         };
         image.setAttribute('src', imageSrc);
+        image.alt = thumbnailElement ? thumbnailElement.alt || '' : '';
         if (options.titleTag && imageCaption) {
             image.title = imageCaption;
         }
         figure.appendChild(image);
-        // Insert caption if available
-        if (options.captions && imageCaption) {
-            figcaption.innerHTML = imageCaption;
-            figure.appendChild(figcaption);
-        }
+
         // Run callback
         if (options.async && callback) {
             callback();

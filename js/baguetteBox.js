@@ -103,25 +103,33 @@
     };
     var touchmoveHandler = function(event) {
         // If action was already triggered return
-        if (touchFlag) {
-            return;
-        }
-//        event.preventDefault ? event.preventDefault() : event.returnValue = false; // jshint ignore:line
-        var touch = event.touches[0] || event.changedTouches[0];
-        // Move at least 40 pixels to trigger the action
-        if (touch.pageX - touchStartX > 40) {
-            touchFlag = true;
-            showPreviousImage();
-        } else if (touch.pageX - touchStartX < -40) {
-            touchFlag = true;
-            showNextImage();
-        // Move 100 pixels up to close the overlay
-        } else if (touchStartY - touch.pageY > 100) {
-            hideOverlay();
+        if (window.innerWidth == viewport) {
+            if (touchFlag) {
+                return;
+            }
+            event.preventDefault ? event.preventDefault() : event.returnValue = false; // jshint ignore:line
+            var touch = event.touches[0] || event.changedTouches[0];
+            // Move at least 40 pixels to trigger the action
+            if (touch.pageX - touchStartX > 40) {
+                touchFlag = true;
+                showPreviousImage();
+            } else if (touch.pageX - touchStartX < -40) {
+                touchFlag = true;
+                showNextImage();
+            // Move 100 pixels up to close the overlay
+            } else if (touchStartY - touch.pageY > 100) {
+                hideOverlay();
+            }
+        } else if (window.innerWidth > viewport) {
+            return false;
         }
     };
     var touchendHandler = function() {
-        touchFlag = false;
+        if (window.innerWidth == viewport) {
+            touchFlag = false;
+        } else if (window.innerWidth > viewport) {
+            touchFlag = true;
+        }
     };
 
     // forEach polyfill for IE8

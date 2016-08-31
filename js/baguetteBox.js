@@ -103,7 +103,7 @@
     };
     var touchmoveHandler = function(event) {
         // If action was already triggered return
-        if (window.innerWidth == viewport) {
+        if (window.innerWidth == viewport || event.length != 2) {
             if (touchFlag) {
                 return;
             }
